@@ -21,11 +21,16 @@ class DataIngestion:
     def __init__(self, src_path: str=None, 
                  test_size: int=0.2, random_seed: Optional[int]=None):
         '''
-        Initialize Data ingestion class
+        Initialize DataIngestion class.
+
+        This class is used for data ingestion from a specified source file.
+
         Args:
-            src_path: str-> path of file that is used as data ingestion
-            test_size: int (Default: 0.2) -> test split ratio for splitting dataset data
-            random_seed: int(Default: None) -> random_seed to get same result in differnt computing environment for `train_test_split`
+            src_path (str): Path of the file used for data ingestion.
+            test_size (float, optional): Test split ratio for splitting the dataset. Default is 0.2.
+            random_seed (int, optional): Random seed used for consistent results in different computing environments
+                                        when using `train_test_split`. Default is None.
+
         '''
         self.ingestion_data_path=DataIngestionConfig()
         self.src_path=src_path
@@ -33,6 +38,16 @@ class DataIngestion:
         self.random_seed=random_seed
     
     def initiate_data_ingestion(self):
+        '''
+        Initialize the data ingestion process.
+
+        This method performs a test-train split on the dataset and returns the paths of the train and test splits.
+
+        Returns:
+            train_path (str): Path of the train split.
+            test_path (str): Path of the test split.
+
+        '''
         logging.info("Initiating data ingestion method in DataIngestion class")
         try:
             df = pd.read_csv(self.src_path)

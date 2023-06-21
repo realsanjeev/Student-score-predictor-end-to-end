@@ -21,15 +21,16 @@ A `dataclass` is a class that is designed to only hold data values. They aren't 
 ### Project Structure
 ```
 Ml_project\
-    \src
-        \components
+    src\
+        components\
             data_ingestion.py
             data_transformation.py
-        \pipeline
+        pipeline\
             pipeline.py
         __init__.py
         exception.py
         logger.py
+        utils.py
 setup.py
 ```
 ### doctest
