@@ -18,4 +18,18 @@ This command assumes that you are in the root directory of the project where the
 ### Dataclass
 A `dataclass` is a class that is designed to only hold data values. They aren't different from regular classes, but they usually don't have any other methods. They are typically used to store information that will be passed between different parts of a program or a system.
 
+### Project Structure
+```
+Ml_project\
+    \src
+        \components
+            data_ingestion.py
+            data_transformation.py
+        \pipeline
+            pipeline.py
+        __init__.py
+        exception.py
+        logger.py
+setup.py
+```
 ### doctest

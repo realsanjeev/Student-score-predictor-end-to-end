@@ -1,7 +1,12 @@
 import os
 import sys
 import numpy as np
+import pandas as pd
 from dataclasses import dataclass
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 @dataclass
 class DataTransformationConfig:

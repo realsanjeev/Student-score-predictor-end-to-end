@@ -5,17 +5,20 @@ from dataclasses import dataclass
 from typing import Optional
 from sklearn.model_selection import train_test_split
 
-from src.exception import CustomException
-from src.logger import logging
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from exception import CustomException
+from logger import logging
+
 
 @dataclass
 class DataIngestionConfig:
-    raw_data_path: str= os.path.jon("artifacts", "raw.csv")
+    raw_data_path: str= os.path.join("artifacts", "raw.csv")
     train_data_path: str= os.path.join("artifacts", "train.csv")
-    test_data_path: str= os.path.jon("artifacts", "test.csv")
+    test_data_path: str= os.path.join("artifacts", "test.csv")
 
 class DataIngestion:
-    def __init__(self, src_path=None, 
+    def __init__(self, src_path: str=None, 
                  test_size: int=0.2, random_seed: Optional[int]=None):
         '''
         Initialize Data ingestion class
@@ -45,12 +48,14 @@ class DataIngestion:
                                                     test_size=self.test_size, random_state=self.random_seed)
             train_set.to_csv(self.ingestion_data_path.train_data_path, 
                              header=True, index=False)
-            test_set.to_scv(self.ingestion_data_path.test_data_path)
+            test_set.to_csv(self.ingestion_data_path.test_data_path,
+                            header=True, index=False)
             return (
                 self.ingestion_data_path.train_data_path,
                 self.ingestion_data_path.test_data_path
             )
         except Exception as err:
+            logging.error(err)
             raise CustomException(err, sys)
 
 
