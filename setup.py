@@ -9,7 +9,7 @@ def get_requirements(filename: str) -> list():
     Args:
         filename: str -> filename for requirements
     Results:
-        list of name of package
+        requirements: List -> list of name of package
     """
     with open(filename) as file_handler:
        requirements = file_handler.readlines()

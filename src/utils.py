@@ -70,8 +70,10 @@ def evaluate_model(train_array: tuple,
             test_model_score = r2_score(y_test, y_test_pred)
 
             score = {"train_r2_score": train_model_score,
-                     "test_r2_score": test_model_score}
+                     "test_r2_score": test_model_score,
+                     "model": model}
             report[key] = score
+
 
         return report
     except Exception as err:

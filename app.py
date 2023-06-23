@@ -7,29 +7,22 @@ app = Flask(__name__)
 def index():
     pipeline = PredictPipeline()
     features = pipeline.get_features()
+    in_features = dict()
     if request.method == "POST":
-        gender = request.form.get("gender")
-        race_ethnicity = request.form.get("race_ethnicity")
-        parental_level_of_education = request.form.get("parental_level_of_education")
-        lunch = request.form.get("lunch")
-        test_preparation_course = request.form.get("test_preparation_course")
+        in_features["gender"] = request.form.get("gender")
+        in_features["race_ethnicity"] = request.form.get("race_ethnicity")
+        in_features["parental_level_of_education"] = request.form.get("parental_level_of_education")
+        in_features["lunch"] = request.form.get("lunch")
+        in_features["test_preparation_course"] = request.form.get("test_preparation_course")
 
-        writing_score = int(request.form.get("writing_score"))
-        reading_score = int(request.form.get("reading_score"))
+        in_features["writing_score"] = int(request.form.get("writing_score"))
+        in_features["reading_score"] = int(request.form.get("reading_score"))
 
-        scaled_data = pipeline.preprocess(gender, race_ethnicity, 
-                                          parental_level_of_education, 
-                                          lunch, test_preparation_course, 
-                                          reading_score, writing_score)
-        result = 10
-        print(gender,
-            race_ethnicity,
-            parental_level_of_education,
-            lunch,
-            test_preparation_course,
-            writing_score,
-            reading_score)
-        return render_template("index.html", features=features, result=result)
+        scaled_data = pipeline.preprocess(in_features)
+        result = pipeline.predict_score(scaled_data=scaled_data)
+        print("*"*34, result, "*"*32)
+        result = 2
+        return render_template("index.html", features=features, result=result[0])
     elif request.method == "GET":
         return render_template("index.html", features=features)
 

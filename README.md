@@ -1,6 +1,6 @@
 # ML project
 
-### Set Up environment
+## Set Up environment
 ```
 virtualenv env
 source ./venv/Scripts/activate
