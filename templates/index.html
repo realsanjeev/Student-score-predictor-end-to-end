@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block main_component %}
+<div class="container">
+    <form action="/" id="survey-form" method="post">
+        <div id="dropdown-div">
+            {% for cat_features in features["categorical"] %}
+            <label id="drop-label" for="dropdown" class="cat-text">{{cat_features}}</label>
+            <select id="dropdown" class="top-input" name="{{cat_features}}">
+                {% for attribute in features["categorical"][cat_features] %}
+                <option value="{{attribute}}">{{attribute}}</option>
+                {% endfor %}
+            </select>
+            {% endfor %}
+        </div>
+        
+        <button id="submit" class="button">Predict</button>
+    </form>
+    {% if result %}
+        <h1>The math score is {{result}}</h1>
+    {% endif %}
+</div>
+{% endblock main_component %}

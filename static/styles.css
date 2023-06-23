@@ -1,0 +1,121 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background: linear-gradient(rgba(2, 34, 197, 0.857), blue);
+}
+.container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+}
+.header {
+    padding: 15px;
+    background-color: rgb(47, 46, 46);
+    color: aliceblue;
+    font-size: large;
+    text-align: center;
+}
+body {
+    margin: 50px auto;
+    font-family: 'Poppins', sans-serif;
+    color: #d9dcd6;
+    background-image: url('https://images.unsplash.com/photo-1619266465172-02a857c3556d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.registration {
+    margin: auto;
+    max-width: 800px;
+    background-color: rgba(51, 54, 52, 0.8);
+    border-radius: 10px 10px 0 0;
+    border: 1px solid black;
+    border-radius: 10px 10px 0 0;
+}
+
+header {
+    text-align: center;
+
+}
+
+#survey-form {
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+    border-top: 2px solid rgb(51, 54, 52);
+
+}
+
+.top-label {
+    margin-top: 10px;
+}
+
+.top-input {
+    margin-top: 10px;
+    height: 25px;
+    width: 100%;
+    font-size: 16px;
+}
+
+
+#dropdown-div {
+    margin: 20px 10px;
+}
+
+
+#dropdown {
+    width: 100%;
+    height: 25px;
+}
+
+textarea {
+    font-family: 'Poppins', sans-serif;
+}
+
+fieldset {
+
+    padding-bottom: 20px;
+    border: none;
+}
+
+fieldset a {
+    text-decoration: none;
+    color: #0d7dec;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.button {
+    margin: 20px auto 10px;
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    color: #d9dcd6;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    max-width: 200px;
+    min-height: 44px;
+    min-width: 100px;
+    outline: none;
+    overflow: hidden;
+    padding: 12px 30px 10px;
+    text-align: center;
+}
+
+.button:hover,
+.button:focus {
+    opacity: .75;
+}
+.cat-text {
+    text-transform: capitalize;
+}
+
