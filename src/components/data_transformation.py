@@ -24,6 +24,7 @@ class DataTransformation:
     
     def get_transformation_obj(self, num_features, categorical_features):
         '''
+        Returns the preprocessor object
         '''
         numerical_pipeline = Pipeline(steps=[
                 ("impute", SimpleImputer(strategy="median")),
@@ -46,10 +47,21 @@ class DataTransformation:
             raise CustomException(err, sys)
         
     def initiate_data_transformation(self, train_path, test_path):
+        '''
+        Initialize data transformation for features
+        Args:
+            `train_path`: path(str) -> path for training data set
+            `test_path`: path(str) -> paath for testing data set
+        Returns:
+            `train_arr`: np.array() -> array of training data after preprocessing feature
+            `test_arr`: np.array() -> array of test data after transforming feature
+            `preprocessing_path`: saved path of preprocessing object
+
+        '''
         try:
             train_data_df = pd.read_csv(train_path)
             test_data_df = pd.read_csv(test_path)
-            logging.info("Reading trainn and test dataset")
+            logging.info("Reading training and test dataset from path")
 
             numerical_columns = [
                 "writing_score",
