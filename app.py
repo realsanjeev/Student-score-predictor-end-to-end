@@ -14,10 +14,13 @@ def index():
         lunch = request.form.get("lunch")
         test_preparation_course = request.form.get("test_preparation_course")
 
-        # writing_score = int(request.form.get("writing_score"))
-        # reading_score = int(request.form.get("reading_score"))
-        writing_score=0
-        reading_score=0
+        writing_score = int(request.form.get("writing_score"))
+        reading_score = int(request.form.get("reading_score"))
+
+        scaled_data = pipeline.preprocess(gender, race_ethnicity, 
+                                          parental_level_of_education, 
+                                          lunch, test_preparation_course, 
+                                          reading_score, writing_score)
         result = 10
         print(gender,
             race_ethnicity,

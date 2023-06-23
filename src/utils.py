@@ -19,10 +19,10 @@ def save_object(obj, path):
 def load_object(path):
     try:
         with open(path, "rb") as file_p:
-            byte_stream =  pickle.load(path)
+            byte_stream =  pickle.load(file_p)
         return byte_stream
     except Exception as err:
-        logging.error("Error while loading the file in path: {path}")
+        logging.error(f"Error while loading the file in path: {path}")
         raise CustomException(err, sys)
     
 def evaluate_model(train_array: tuple, 
