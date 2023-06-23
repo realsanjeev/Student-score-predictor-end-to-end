@@ -19,10 +19,9 @@ def index():
         in_features["reading_score"] = int(request.form.get("reading_score"))
 
         scaled_data = pipeline.preprocess(in_features)
-        result = pipeline.predict_score(scaled_data=scaled_data)
-        print("*"*34, result, "*"*32)
-        result = 2
-        return render_template("index.html", features=features, result=result[0])
+        result = int(pipeline.predict_score(scaled_data=scaled_data)[0])
+        print("%")
+        return render_template("index.html", features=features, result=result)
     elif request.method == "GET":
         return render_template("index.html", features=features)
 

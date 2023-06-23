@@ -55,11 +55,10 @@ def evaluate_model(train_array: tuple,
             print("*"*9, key, "*"*3)
             estimator = models[key]
             param = params_grid.get(key, 0)
-            try:
+            if param != 0:
                 model = GridSearchCV(estimator, param, cv=5)
-            except Exception as err:
-                logging.warn(f"Problem while training with model without providing params: {estimator}. Training with default parameter")
-                logging.critical(f"{err}")
+            else:
+                logging.warn(f"Trainng with default parameter: {estimator}")
                 model = estimator
             # fitting training data in the model
             model.fit(X_train, y_train)

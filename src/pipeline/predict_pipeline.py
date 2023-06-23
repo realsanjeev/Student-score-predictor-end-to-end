@@ -51,8 +51,8 @@ class PredictPipeline:
         logging.info(f"Predction started with preprocessed data")
         try:
             model_obj = load_object(self.model_obj)
-            model_obj.predict(scaled_data)
-            return model_obj
+            result = model_obj.predict(scaled_data)
+            return result
         except Exception as err:
             logging.error(f"Error while predicting result. {err}")
             raise CustomException(err, sys)

@@ -119,3 +119,8 @@ fieldset a {
     text-transform: capitalize;
 }
 
+.result {
+    display: flex;
+    height: 500px;
+    align-items: center;
+}

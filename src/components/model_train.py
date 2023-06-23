@@ -45,8 +45,7 @@ class ModelTrainerConfig:
     "Decision Tree": {
         "max_depth": [5, 10, None],
         "min_samples_split": [2, 5, 10],
-        "min_samples_leaf": [1, 2, 4],
-        "max_features": ["auto", "sqrt"]
+        "min_samples_leaf": [1, 2, 4]
     },
     "Gradient Boosting": {
         "n_estimators": [100, 200, 300],
@@ -93,10 +92,9 @@ class ModelTrainer:
                                           test_array, 
                                           models, 
                                           models_param)
+            print(model_report)
 
-            report_df = pd.DataFrame(model_report)
-            # For more readability of dataframe transpose it
-            report_df = report_df.transpose()
+            report_df = pd.DataFrame.from_dict(model_report, orient='index')
             print(report_df)
 
             best_model_name = report_df['test_r2_score'].idxmax()
