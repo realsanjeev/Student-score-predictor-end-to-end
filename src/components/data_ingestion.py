@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Optional
 from sklearn.model_selection import train_test_split
 from data_transformation import DataTransformation
+from model_train import ModelTrainer
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -80,4 +81,6 @@ if __name__ == "__main__":
     train_path, test_path = data_ingestion_obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_path, test_path)
+    train_arr, test_arr, _ =data_transformation.initiate_data_transformation(train_path, test_path)
+    model_trainer = ModelTrainer()
+    report = model_trainer.initiate_model_training(train_arr, test_arr)

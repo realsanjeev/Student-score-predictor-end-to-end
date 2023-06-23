@@ -2,6 +2,7 @@ import os
 import sys
 import pickle
 from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
 
 from exception import CustomException
 from logger import logging
@@ -24,7 +25,21 @@ def load_object(path):
         logging.error("Error while loading the file in path: {path}")
         raise CustomException(err, sys)
     
-def evaluate_model(train_array: tuple, test_array: tuple, models: dict) -> dict:
+def evaluate_model(train_array: tuple, 
+                    test_array: tuple, 
+                    models: dict, 
+                    params_grid: dict) -> dict:
+    """
+    Returns report for all model used to train
+    
+    Args:
+        train_array: np.array()
+        test_array: np.array()
+        models: dict
+        params_grid: dict
+    Result:
+        report: dict -> report of model summary
+    """
     # unpacking the tuple to feature and target
     X_train, y_train = (
         train_array[:,:-1],
@@ -37,7 +52,15 @@ def evaluate_model(train_array: tuple, test_array: tuple, models: dict) -> dict:
     try:
         report = {}
         for key in models.keys():
-            model = models[key]
+            print("*"*9, key, "*"*3)
+            estimator = models[key]
+            param = params_grid.get(key, 0)
+            try:
+                model = GridSearchCV(estimator, param, cv=5)
+            except Exception as err:
+                logging.warn(f"Problem while training with model without providing params: {estimator}. Training with default parameter")
+                logging.critical(f"{err}")
+                model = estimator
             # fitting training data in the model
             model.fit(X_train, y_train)
             y_train_pred = model.predict(X_train)
@@ -50,7 +73,7 @@ def evaluate_model(train_array: tuple, test_array: tuple, models: dict) -> dict:
                      "test_r2_score": test_model_score}
             report[key] = score
 
-            return report
+        return report
     except Exception as err:
         logging.error("Error while evaluating model")
         raise CustomException(err, sys)
