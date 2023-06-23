@@ -5,7 +5,7 @@
     <form action="/" id="survey-form" method="post">
         <div id="dropdown-div">
             {% for cat_features in features["categorical"] %}
-            <label id="drop-label" for="dropdown" class="cat-text">{{cat_features}}</label>
+            <label id="drop-label" for="dropdown" class="feature-text">{{cat_features}}</label>
             <select id="dropdown" class="top-input" name="{{cat_features}}">
                 {% for attribute in features["categorical"][cat_features] %}
                 <option value="{{attribute}}">{{attribute}}</option>
@@ -13,6 +13,13 @@
             </select>
             {% endfor %}
         </div>
+        <label id="name-label" class="top-label" class="feature-text">writing_score </label>
+        <input id="name" class="top-input" name="writing_score" max="100" min="0" type="number"
+                placeholder="Writing score" required></input>
+
+        <label id="name-label" class="top-label" class="feature-text">reading_score </label>
+        <input id="name" class="top-input" name="reading_score" max="100" min="0" type="number"
+                placeholder="Reading Score" required></input>
         
         <button id="submit" class="button">Predict</button>
     </form>

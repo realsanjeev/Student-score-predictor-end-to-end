@@ -115,7 +115,7 @@ fieldset a {
 .button:focus {
     opacity: .75;
 }
-.cat-text {
+.feature-text {
     text-transform: capitalize;
 }
 
