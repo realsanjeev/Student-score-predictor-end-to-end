@@ -30,7 +30,7 @@ class PredictPipeline:
         Preprocess the feature data provided by user
 
         Args:
-            freatures_data: dict -> freatures data provided by user in original form
+            freatures_data: dict -> freatures data provided by user in original form/json
         Result:
             Data features after being processed
         """

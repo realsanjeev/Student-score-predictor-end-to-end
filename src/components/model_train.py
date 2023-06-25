@@ -31,9 +31,7 @@ class ModelTrainerConfig:
                 "Linear Regression": LinearRegression(),
                 "K-Neighbors Regression": KNeighborsRegressor(),
                 "AdaBoost Regressor": AdaBoostRegressor(),
-                "Hist Gradient Boosting Regressor": HistGradientBoostingRegressor(),
-                # "XGBRegressor": XGBRegressor(),
-                # "CatBoosting Regressor": CatBoostRegressor(verbose=False)
+                "Hist Gradient Boosting Regressor": HistGradientBoostingRegressor()
                 }
     models_param = {
     "Random Forest": {
@@ -84,6 +82,14 @@ class ModelTrainer:
             self.confidence = 0.6
 
     def initiate_model_training(self, train_array, test_array):
+        '''
+        Return best model for 
+        Args:
+            train_array: np.array() -> training data array
+            test_array: np.array() -> testng data array
+        Results:
+            best_model: sklearn model that does best prediction
+        '''
         try:
             logging.info("Initiating the model training")
             models = self.model_trainer_config.models_info

@@ -1,4 +1,7 @@
-from flask import render_template, Flask, request, url_for, jsonify
+from flask import (render_template, 
+                   Flask, request, 
+                   url_for, 
+                   jsonify)
 
 from src.pipeline.predict_pipeline import PredictPipeline
 
@@ -35,7 +38,7 @@ def api_request():
         in_features = request.json
         scaled_data = pipeline.preprocess(in_features)
         result = int(pipeline.predict_score(scaled_data=scaled_data)[0])
-
         return jsonify({"message": f"The math score is {result}"})
+    
 if __name__=="__main__":
     app.run(debug=True)
