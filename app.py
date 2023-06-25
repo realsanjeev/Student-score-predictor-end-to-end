@@ -1,4 +1,4 @@
-from flask import render_template, Flask, request, url_for
+from flask import render_template, Flask, request, url_for, jsonify
 
 from src.pipeline.predict_pipeline import PredictPipeline
 
@@ -25,5 +25,17 @@ def index():
     elif request.method == "GET":
         return render_template("index.html", features=features)
 
+@app.route("/api", methods=["GET", "POST"])
+def api_request():
+    pipeline = PredictPipeline()
+    if request.method == "GET":
+        return jsonify({"message": "Use Post Method to predict the math score"})
+    
+    if request.method == "POST":
+        in_features = request.json
+        scaled_data = pipeline.preprocess(in_features)
+        result = int(pipeline.predict_score(scaled_data=scaled_data)[0])
+
+        return jsonify({"message": f"The math score is {result}"})
 if __name__=="__main__":
     app.run(debug=True)

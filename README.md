@@ -48,3 +48,6 @@ setup.py
 
 
 ### doctest
+
+### API works
+<img src="api_work.PNG" alt="api form postman" />
