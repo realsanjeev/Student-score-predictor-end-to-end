@@ -83,7 +83,7 @@ class ModelTrainer:
 
     def initiate_model_training(self, train_array, test_array):
         '''
-        Return best model for 
+        Return best model for test data
         Args:
             train_array: np.array() -> training data array
             test_array: np.array() -> testng data array

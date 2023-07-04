@@ -7,6 +7,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from src.constants.constant import FeaturesConfig
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -63,20 +64,13 @@ class DataTransformation:
             test_data_df = pd.read_csv(test_path)
             logging.info("Reading training and test dataset from path")
 
-            numerical_columns = [
-                "writing_score",
-                "reading_score"]
-            categorical_columns = [
-                "gender",
-                "race_ethnicity",
-                "parental_level_of_education",
-                "lunch",
-                "test_preparation_course",
-            ]
+            feature = FeaturesConfig()
+            numerical_columns = feature.NUMERICAL_FEATURES
+            categorical_columns = feature.CATEGORICAL_FEATURES
             # initiating preprocessing object
             preprocessing_obj = self.get_transformation_obj(numerical_columns, categorical_columns)
 
-            traget_column="math_score"
+            traget_column = feature.TARGET_FEATURE
 
             # separatiom of record in input and output features in dataframe
             input_feature_train_data = train_data_df.drop(columns=[traget_column], axis=1)
