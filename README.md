@@ -34,6 +34,11 @@ Ml_project\
 setup.py
 ```
 
+## Run project to train
+```
+python src/components/data_ingestion.py
+```
+
 ## Ensemble Techinique
 ### `AdaBoostRegressor` and `GradientBoostingRegressor`
 1. **Algorithm:** `AdaBoostRegressor` uses the AdaBoost algorithm, which combines multiple weak learners in a sequential manner. It assigns higher weights to the misclassified instances in each iteration to focus on those instances and improve the model's performance. On the other hand, `GradientBoostingRegressor` uses the gradient boosting algorithm, which also combines multiple weak learners, but it fits subsequent models to the residuals (errors) of the previous models, attempting to minimize the loss function through gradient descent.

@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 import pandas as pd
 from dataclasses import dataclass
 from typing import Optional
@@ -21,7 +22,7 @@ class DataIngestionConfig:
 
 class DataIngestion:
     def __init__(self, src_path: str=None, 
-                 test_size: int=0.2, random_seed: Optional[int]=None):
+                 test_size: float=0.2, random_seed: Optional[int]=None):
         '''
         Initialize DataIngestion class.
 
@@ -30,8 +31,9 @@ class DataIngestion:
         Args:
             src_path (str): Path of the file used for data ingestion.
             test_size (float, optional): Test split ratio for splitting the dataset. Default is 0.2.
-            random_seed (int, optional): Random seed used for consistent results in different computing environments
-                                        when using `train_test_split`. Default is None.
+            random_seed (int, optional): Random seed used for consistent results \n
+            in different computing environments\n
+            when using `train_test_split`. Default is None.
 
         '''
         self.ingestion_data_path=DataIngestionConfig()
@@ -43,7 +45,8 @@ class DataIngestion:
         '''
         Initialize the data ingestion process.
 
-        This method performs a test-train split on the dataset and returns the paths of the train and test splits.
+        This method performs a test-train split on the dataset \n
+        and returns the paths of the train and test splits.
 
         Returns:
             train_path (str): Path of the train split.
@@ -62,7 +65,8 @@ class DataIngestion:
             
             logging.info("Train test split initiated")
             train_set, test_set =  train_test_split(df, 
-                                                    test_size=self.test_size, random_state=self.random_seed)
+                                                    test_size=self.test_size, 
+                                                    random_state=self.random_seed)
             train_set.to_csv(self.ingestion_data_path.train_data_path, 
                              header=True, index=False)
             test_set.to_csv(self.ingestion_data_path.test_data_path,
@@ -77,7 +81,21 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-    data_ingestion_obj = DataIngestion(src_path="project.csv")
+    parser = argparse.ArgumentParser(description="[INFO] Train-test-split for dataset")
+    parser.add_argument('-s', '--split', 
+                        help="Train-test-split for dividing dataset for training", type=float)
+    args = parser.parse_args()
+    
+    if args.split is None:
+        test_train_split = 0.2  # Set a default value if split is not provided
+        logging.warning('Split value not provided. Using default split value of 0.2')
+    else:
+        test_train_split = abs(args.split)
+        if test_train_split > 0.5:
+            test_train_split = 0.2
+            logging.warning('Train test split cannot be more than 0.5')
+
+    data_ingestion_obj = DataIngestion(src_path="project.csv", test_size=test_train_split)
     train_path, test_path = data_ingestion_obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()

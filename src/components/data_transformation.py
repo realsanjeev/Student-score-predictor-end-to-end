@@ -7,13 +7,14 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from src.constants.constant import FeaturesConfig
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from exception import CustomException
 from logger import logging
 from utils import save_object
+
+from constants.constant import FeaturesConfig
 
 @dataclass
 class DataTransformationConfig:
