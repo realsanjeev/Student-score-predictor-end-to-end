@@ -41,7 +41,7 @@ class DataIngestion:
         self.test_size=test_size
         self.random_seed=random_seed
     
-    def initiate_data_ingestion(self):
+    def initiate_data_ingestion(self) -> tuple:
         '''
         Initialize the data ingestion process.
 

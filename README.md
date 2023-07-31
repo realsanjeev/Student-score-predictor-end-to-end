@@ -1,4 +1,4 @@
-# ML project
+# ML project 
 
 ## Set Up environment
 ```
@@ -52,7 +52,6 @@ python src/components/data_ingestion.py
 5. **Hyperparameters:** Both algorithms have their specific set of hyperparameters. While they share some common hyperparameters (e.g., number of estimators), they may have different hyperparameters related to their respective algorithms. For example, `AdaBoostRegressor` has parameters like learning rate and loss function, whereas `GradientBoostingRegressor` has parameters like learning rate, maximum tree depth, and subsampling rate.
 
 
-### doctest
 
 ### API works
 <img src="api_work.PNG" alt="api form postman" />

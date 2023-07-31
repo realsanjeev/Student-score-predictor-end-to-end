@@ -1,13 +1,22 @@
 import os
 import sys
 import pickle
+from pathlib import Path
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
 
 from src.exception import CustomException
 from src.logger import logging
 
-def save_object(obj, path):
+def save_object(obj, path: Path) -> None:
+    """Save object in `pickle file`
+
+    Args:
+        obj: <Object> -> object to be serialized and saved
+        path: Path -> Path of file to be saved
+    Return:
+        None
+    """
     try:
         with open(path, "wb") as file_p:
             pickle.dump(obj, file_p, pickle.HIGHEST_PROTOCOL)
@@ -16,7 +25,7 @@ def save_object(obj, path):
         logging.error(f"Error Saving the object: {err}")
         raise CustomException(err, sys)
     
-def load_object(path):
+def load_object(path: Path):
     try:
         with open(path, "rb") as file_p:
             byte_stream =  pickle.load(file_p)

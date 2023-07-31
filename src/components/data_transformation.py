@@ -3,6 +3,8 @@ import sys
 import numpy as np
 import pandas as pd
 from dataclasses import dataclass
+from pathlib import Path
+
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
@@ -48,12 +50,12 @@ class DataTransformation:
             logging.error("Error occur when constructing preprocess transformer")
             raise CustomException(err, sys)
         
-    def initiate_data_transformation(self, train_path, test_path):
+    def initiate_data_transformation(self, train_path: Path, test_path: Path):
         '''
         Initialize data transformation for features
         Args:
-            `train_path`: path(str) -> path for training data set
-            `test_path`: path(str) -> paath for testing data set
+            `train_path`: Path -> path for training data set
+            `test_path`: Path -> paath for testing data set
         Returns:
             `train_arr`: np.array() -> array of training data after preprocessing feature
             `test_arr`: np.array() -> array of test data after transforming feature
