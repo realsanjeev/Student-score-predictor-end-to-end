@@ -2,6 +2,7 @@ import os
 import sys
 import numpy as np
 import pandas as pd
+
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -16,7 +17,7 @@ from exception import CustomException
 from logger import logging
 from utils import save_object
 
-from constants.constant import FeaturesConfig
+from constants.feature import FeaturesConfig
 
 @dataclass
 class DataTransformationConfig:

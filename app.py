@@ -6,6 +6,7 @@ from flask import (render_template,
 from src.pipeline.predict_pipeline import PredictPipeline
 
 app = Flask(__name__)
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     pipeline = PredictPipeline()

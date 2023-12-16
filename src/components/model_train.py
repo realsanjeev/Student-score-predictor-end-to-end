@@ -1,9 +1,10 @@
 import os
 import sys
-from dataclasses import dataclass
 import numpy as np
 import pandas as pd
+
 from math import fabs
+from dataclasses import dataclass
 
 from sklearn.ensemble import (
     AdaBoostRegressor,
@@ -73,12 +74,13 @@ class ModelTrainerConfig:
 
 
 class ModelTrainer:
-    def __init__(self, confidence_threshold:float =0.6):
+    def __init__(self, confidence_threshold:float = 0.6):
         self.model_trainer_config = ModelTrainerConfig()
         if fabs(confidence_threshold) < 1:
             self.confidence = confidence_threshold
         else:
-            logging.warning("Confidence level cannot be more than 1. Re=assgining the confidence to 0.6")
+            logging.warning("Confidence level cannot be more than 1.\
+                            Re=assgining the confidence to 0.6")
             self.confidence = 0.6
 
     def initiate_model_training(self, train_array, test_array):
@@ -107,8 +109,10 @@ class ModelTrainer:
             best_score = report_df.loc[best_model_name, 'test_r2_score']
 
             if best_score < self.confidence:
-                logging.critical(f"No best model is detected. Best model was: {best_model} with best score: {best_score}")
-                raise CustomException(f"No best model is detected. Best model was: {best_model} with best score: {best_score}")
+                logging.critical(f"No best model is detected.\
+                                 Best model was: {best_model} with best score: {best_score}")
+                raise CustomException(f"No best model is detected.\
+                                      Best model was: {best_model} with best score: {best_score}")
             # get trained model object and store for future use
             best_model = report_df.loc[best_model_name, 'model']
 
@@ -123,4 +127,4 @@ class ModelTrainer:
             raise CustomException(err, sys)
 
 if __name__=="__main__":
-    print("Main initiated")
+    print("Initiate python src/components/data_ingestion.py to train the model")

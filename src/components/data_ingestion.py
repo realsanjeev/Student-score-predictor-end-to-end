@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import pandas as pd
+
 from dataclasses import dataclass
 from typing import Optional
 from sklearn.model_selection import train_test_split
@@ -64,9 +65,9 @@ class DataIngestion:
                       header=True, index=False)
             
             logging.info("Train test split initiated")
-            train_set, test_set =  train_test_split(df, 
-                                                    test_size=self.test_size, 
-                                                    random_state=self.random_seed)
+            train_set, test_set = train_test_split(df,
+                                                   test_size=self.test_size,
+                                                   random_state=self.random_seed)
             train_set.to_csv(self.ingestion_data_path.train_data_path, 
                              header=True, index=False)
             test_set.to_csv(self.ingestion_data_path.test_data_path,
@@ -83,7 +84,11 @@ class DataIngestion:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="[INFO] Train-test-split for dataset")
     parser.add_argument('-s', '--split', 
-                        help="Train-test-split for dividing dataset for training", type=float)
+                        help="Train-test-split for dividing dataset for training",
+                        type=float)
+    parser.add_argument('-d', '--data',
+                        help="Path for dataset of student score prediction",
+                        type=str)
     args = parser.parse_args()
     
     if args.split is None:

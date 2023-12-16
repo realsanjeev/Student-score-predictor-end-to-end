@@ -4,7 +4,8 @@ from dataclasses import dataclass
 class FeaturesConfig:
     NUMERICAL_FEATURES = [
                     "writing_score",
-                    "reading_score"]
+                    "reading_score"
+                    ]
     CATEGORICAL_FEATURES = [
                     "gender",
                     "race_ethnicity",
