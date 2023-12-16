@@ -2,11 +2,15 @@ import os
 import sys
 import pickle
 from pathlib import Path
+
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
 
 from src.exception import CustomException
 from src.logger import logging
+
+RECORD_FILE_PATH = os.path.join(os.getcwd(), "record", "stat.csv")
+os.makedirs(RECORD_FILE_PATH, exist_ok=True)
 
 def save_object(obj, path: Path) -> None:
     """Save object in `pickle file`
@@ -38,8 +42,7 @@ def evaluate_model(train_array: tuple,
                     test_array: tuple, 
                     models: dict, 
                     params_grid: dict) -> dict:
-    """
-    Returns report for all model used to train
+    """Returns report for all model used to train
     
     Args:
         train_array: np.array()
@@ -81,7 +84,6 @@ def evaluate_model(train_array: tuple,
                      "test_r2_score": test_model_score,
                      "model": model}
             report[key] = score
-
 
         return report
     except Exception as err:

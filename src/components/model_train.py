@@ -20,7 +20,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from exception import CustomException
 from logger import logging
-from utils import save_object, evaluate_model
+from utils import (save_object,
+                   evaluate_model,
+                   RECORD_FILE_PATH)
 
 @dataclass
 class ModelTrainerConfig:
@@ -100,10 +102,10 @@ class ModelTrainer:
                                           test_array, 
                                           models, 
                                           models_param)
-            print(model_report)
+            # print(model_report)
 
             report_df = pd.DataFrame.from_dict(model_report, orient='index')
-            print(report_df)
+            report_df.to_csv(RECORD_FILE_PATH, index=True)
 
             best_model_name = report_df['test_r2_score'].idxmax()
             best_score = report_df.loc[best_model_name, 'test_r2_score']

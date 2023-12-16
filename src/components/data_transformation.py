@@ -60,8 +60,7 @@ class DataTransformation:
         Returns:
             `train_arr`: np.array() -> array of training data after preprocessing feature
             `test_arr`: np.array() -> array of test data after transforming feature
-            `preprocessing_path`: saved path of preprocessing object
-
+            `preprocessing_path`: saved path for preprocessing object
         '''
         try:
             train_data_df = pd.read_csv(train_path)
