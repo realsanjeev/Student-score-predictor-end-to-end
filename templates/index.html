@@ -2,31 +2,47 @@
 
 {% block main_component %}
 <div class="container">
-    <form action="/" id="survey-form" method="post">
-        <div id="dropdown-div">
-            {% for cat_features in features["categorical"] %}
-            <label id="drop-label" for="dropdown" class="feature-text">{{cat_features}}</label>
-            <select id="dropdown" class="top-input" name="{{cat_features}}">
-                {% for attribute in features["categorical"][cat_features] %}
-                <option value="{{attribute}}">{{attribute}}</option>
+    <div class="registration">
+        <form action="/" id="survey-form" method="post">
+            <div id="dropdown-div">
+                {% for cat_features in features["categorical"] %}
+                <div class="form-group">
+                    <label for="{{cat_features}}" class="feature-text">{{cat_features.replace('_', ' ')}}</label>
+                    <select id="{{cat_features}}" class="top-input" name="{{cat_features}}">
+                        {% for attribute in features["categorical"][cat_features] %}
+                        <option value="{{attribute}}">{{attribute}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 {% endfor %}
-            </select>
-            {% endfor %}
 
-            <label id="name-label" class="top-label" class="feature-text">writing_score </label>
-            <input id="name" class="top-input" name="writing_score" max="100" min="0" type="number"
-                placeholder="Writing score" required></input>
+                <div class="form-group">
+                    <label for="writing_score" class="feature-text">Writing Score</label>
+                    <input id="writing_score" class="top-input" name="writing_score" max="100" min="0" type="number"
+                        placeholder="Enter writing score (0-100)" required>
+                </div>
 
-            <label id="name-label" class="top-label" class="feature-text">reading_score </label>
-            <input id="name" class="top-input" name="reading_score" max="100" min="0" type="number"
-                placeholder="Reading Score" required></input>
-        </div>
+                <div class="form-group">
+                    <label for="reading_score" class="feature-text">Reading Score</label>
+                    <input id="reading_score" class="top-input" name="reading_score" max="100" min="0" type="number"
+                        placeholder="Enter reading score (0-100)" required>
+                </div>
+            </div>
 
-        <button id="submit" class="button">Predict</button>
-    </form>
-    <div class="result">
+            <button id="submit" class="button">Predict</button>
+        </form>
+    </div>
+    
+    <div class="result-container">
         {% if result %}
-        <h1>The math score is {{result}}</h1>
+        <div class="result success">
+            <h1>Math Score: {{result}}</h1>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="result error">
+            <h3>{{error}}</h3>
+        </div>
         {% endif %}
     </div>
 </div>

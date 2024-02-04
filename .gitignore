@@ -164,3 +164,4 @@ logs/
 
 # artifacts file
 artifacts/
+stat.csv

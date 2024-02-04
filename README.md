@@ -1,67 +1,93 @@
-# ML project 
+# Student Performance Indicator
 
-## Set Up environment
-```
-virtualenv env
-source ./venv/Scripts/activate
-```
-> To shorten path in terminal: PROMPT_DIRTRIM=1
+This project implements a machine learning pipeline to predict student performance based on various features. It includes data ingestion, transformation, model training, and a Flask web application for predictions.
 
-To install dependencies in package: `python setup.py install`. This method is decrecated.
+## 🛠️ Setup Environment
 
-#### Recomendation
-```
-pip install .
-```
-This command assumes that you are in the root directory of the project where the `setup.py` file is located. The `.` specifies the current directory as the source for installation.
-
-### Dataclass
-A `dataclass` is a class that is designed to only hold data values. They aren't different from regular classes, but they usually don't have any other methods. They are typically used to store information that will be passed between different parts of a program or a system.
-
-### Project Structure
-```
-Ml_project\
-    src\
-        components\
-            data_ingestion.py
-            data_transformation.py
-        pipeline\
-            pipeline.py
-        __init__.py
-        exception.py
-        logger.py
-        utils.py
-setup.py
+### 1. Create a Virtual Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
 
-## Run project to train
+### 2. Install Dependencies
+You can install the package and its dependencies using `pip`:
+
+```bash
+pip install -e .
 ```
+
+> **Note:** The method `python setup.py install` is deprecated. Please use `pip install .` instead.
+
+## 🚀 Usage
+
+### Training the Model
+To train the model, run the data ingestion script:
+
+```bash
 python src/components/data_ingestion.py
 ```
 
-## Ensemble Techinique
+### Running the Web App
+To start the Flask application:
+
+```bash
+python app.py
+```
+Access the application at `http://127.0.0.1:5000/`.
+
+## 📂 Project Structure
+
+```
+ml_project/
+├── src/
+│   ├── components/
+│   │   ├── data_ingestion.py
+│   │   ├── data_transformation.py
+│   │   └── model_train.py
+│   ├── pipeline/
+│   │   ├── predict_pipeline.py
+│   ├── utils.py
+│   ├── logger.py
+│   └── exception.py
+├── app.py
+├── setup.py
+├── requirements.txt
+└── README.md
+```
+
+## 🧠 Ensemble Techniques
+
 ### `AdaBoostRegressor` and `GradientBoostingRegressor`
-1. **Algorithm:** `AdaBoostRegressor` uses the AdaBoost algorithm, which combines multiple weak learners in a sequential manner. It assigns higher weights to the misclassified instances in each iteration to focus on those instances and improve the model's performance. On the other hand, `GradientBoostingRegressor` uses the gradient boosting algorithm, which also combines multiple weak learners, but it fits subsequent models to the residuals (errors) of the previous models, attempting to minimize the loss function through gradient descent.
 
-2. **Loss Function:** `AdaBoostRegressor` minimizes the exponential loss function by iteratively adjusting the weights of the training instances. `GradientBoostingRegressor`, on the other hand, can work with different loss functions, such as least squares loss (default), least absolute deviation (L1 loss), or huber loss, allowing more flexibility in capturing different types of relationships in the data.
+1.  **Algorithm:**
+    *   `AdaBoostRegressor` uses the AdaBoost algorithm, combining multiple weak learners sequentially. It weights misclassified instances higher to focus on them.
+    *   `GradientBoostingRegressor` uses gradient boosting, fitting subsequent models to the residuals of previous ones to minimize the loss function.
 
-3. **Weighting of Weak Learners:** In `AdaBoostRegressor`, each weak learner is assigned a weight based on its performance. Weak learners with lower errors are given higher weights. In contrast, `GradientBoostingRegressor` assigns weights to the weak learners based on the gradients of the loss function, indicating the direction and magnitude of the error reduction.
+2.  **Loss Function:**
+    *   `AdaBoostRegressor` minimizes the exponential loss function.
+    *   `GradientBoostingRegressor` supports various loss functions (least squares, absolute deviation, huber).
 
-4. **Model Complexity:** `AdaBoostRegressor` typically uses simple weak learners, such as decision stumps (a decision tree with a single split). It focuses on iteratively correcting the mistakes made by these weak learners. `GradientBoostingRegressor` can use more complex weak learners, usually decision trees with multiple levels, to better capture complex relationships in the data.
+3.  **Weighting of Weak Learners:**
+    *   `AdaBoostRegressor` weights learners based on performance (lower error = higher weight).
+    *   `GradientBoostingRegressor` weights learners based on gradient descent steps.
 
-5. **Hyperparameters:** Both algorithms have their specific set of hyperparameters. While they share some common hyperparameters (e.g., number of estimators), they may have different hyperparameters related to their respective algorithms. For example, `AdaBoostRegressor` has parameters like learning rate and loss function, whereas `GradientBoostingRegressor` has parameters like learning rate, maximum tree depth, and subsampling rate.
+4.  **Model Complexity:**
+    *   `AdaBoostRegressor` typically uses simple decision stumps.
+    *   `GradientBoostingRegressor` can use deeper trees.
 
+5.  **Hyperparameters:**
+    *   Both share parameters like `n_estimators` but have specific ones (e.g., `loss` for AdaBoost, `subsample` for Gradient Boosting).
 
+## 🔌 API
 
-### API works
-<img src="api_work.PNG" alt="api form postman" />
+![API Workflow](api_work.PNG)
 
-
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! If you find any issues or want to add new features, feel free to submit a pull request.
 
-## Contact Me
+## 📬 Contact Me
 
 <table>
   <tr>

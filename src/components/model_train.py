@@ -111,10 +111,8 @@ class ModelTrainer:
             best_score = report_df.loc[best_model_name, 'test_r2_score']
 
             if best_score < self.confidence:
-                logging.critical(f"No best model is detected.\
-                                 Best model was: {best_model} with best score: {best_score}")
-                raise CustomException(f"No best model is detected.\
-                                      Best model was: {best_model} with best score: {best_score}")
+                logging.critical(f"No best model is detected. Best score: {best_score}")
+                raise CustomException(f"No best model is detected. Best score: {best_score}", sys)
             # get trained model object and store for future use
             best_model = report_df.loc[best_model_name, 'model']
 

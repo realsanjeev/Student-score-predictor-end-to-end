@@ -73,19 +73,19 @@ class DataTransformation:
             # initiating preprocessing object
             preprocessing_obj = self.get_transformation_obj(numerical_columns, categorical_columns)
 
-            traget_column = feature.TARGET_FEATURE
+            target_column = feature.TARGET_FEATURE
 
-            # separatiom of record in input and output features in dataframe
-            input_feature_train_data = train_data_df.drop(columns=[traget_column], axis=1)
-            target_feature_train_data = train_data_df[traget_column]
+            # separation of record in input and output features in dataframe
+            input_feature_train_data = train_data_df.drop(columns=[target_column], axis=1)
+            target_feature_train_data = train_data_df[target_column]
 
-            # separating data in input and target featue in test_data_df
-            input_feature_test_data = test_data_df.drop(columns=[traget_column], axis=1)
-            target_feature_test_data = test_data_df[traget_column]
+            # separating data in input and target feature in test_data_df
+            input_feature_test_data = test_data_df.drop(columns=[target_column], axis=1)
+            target_feature_test_data = test_data_df[target_column]
 
             logging.info("Separating feature data and target data from train and test data set")
 
-            # fit data for standrandize data
+            # fit data for standardize data
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_data)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_data)
 

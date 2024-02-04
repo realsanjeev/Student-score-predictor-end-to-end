@@ -10,7 +10,7 @@ from src.exception import CustomException
 from src.logger import logging
 
 RECORD_FILE_PATH = os.path.join(os.getcwd(), "record", "stat.csv")
-os.makedirs(RECORD_FILE_PATH, exist_ok=True)
+os.makedirs(os.path.dirname(RECORD_FILE_PATH), exist_ok=True)
 
 def save_object(obj, path: Path) -> None:
     """Save object in `pickle file`
@@ -64,13 +64,14 @@ def evaluate_model(train_array: tuple,
     try:
         report = {}
         for key in models.keys():
-            print("*"*9, key, "*"*3)
+            print(f"{'-' * 9} Running model: {key} {'-' * 9}")
+
             estimator = models[key]
             param = params_grid.get(key, 0)
             if param != 0:
                 model = GridSearchCV(estimator, param, cv=5)
             else:
-                logging.warn(f"Trainng with default parameter: {estimator}")
+                logging.warning(f"Trainng with default parameter: {estimator}")
                 model = estimator
             # fitting training data in the model
             model.fit(X_train, y_train)

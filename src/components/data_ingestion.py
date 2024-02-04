@@ -6,13 +6,13 @@ import pandas as pd
 from dataclasses import dataclass
 from typing import Optional
 from sklearn.model_selection import train_test_split
-from data_transformation import DataTransformation
-from model_train import ModelTrainer
+from src.components.data_transformation import DataTransformation
+from src.components.model_train import ModelTrainer
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from exception import CustomException
-from logger import logging
+from src.exception import CustomException
+from src.logger import logging
 
 
 @dataclass

@@ -25,20 +25,20 @@ class PredictPipeline:
         self.preprocess_obj_path = os.path.join("artifacts", "preprocessor.pkl")
         self.model_obj = os.path.join("artifacts", "trained_model.pkl")
 
-    def preprocess(self, freatures_data: dict):
+    def preprocess(self, features_data: dict):
         """
         Preprocess the feature data provided by user
 
         Args:
-            freatures_data: dict -> freatures data provided by user in original form/json
+            features_data: dict -> features data provided by user in original form/json
         Result:
             Data features after being processed
         """
         logging.info("Preprocessing of user data started")
-        freature_df = pd.DataFrame(freatures_data, index=[0])
+        feature_df = pd.DataFrame(features_data, index=[0])
         try:
             preprocess_obj = load_object(self.preprocess_obj_path)
-            scaled_data = preprocess_obj.transform(freature_df)
+            scaled_data = preprocess_obj.transform(feature_df)
             return scaled_data
         except Exception as err:
             logging.error(f"Error occurs while working with user data: '{err}' ")
@@ -48,7 +48,7 @@ class PredictPipeline:
         return self.features 
     
     def predict_score(self, scaled_data):
-        logging.info(f"Predction started with preprocessed data")
+        logging.info(f"Prediction started with preprocessed data")
         try:
             model_obj = load_object(self.model_obj)
             result = model_obj.predict(scaled_data)
